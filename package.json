@@ -1,0 +1,42 @@
+{
+  "name": "scene-stealer",
+  "version": "1.0.0",
+  "description": "An HTTP Interface to take a screenshot via puppeteer of a part of a website and send it to you via slack",
+  "main": "index.js",
+  "scripts": {
+    "watch": "nodemon index.js",
+    "test": "mocha -b --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rainist/scene-stealer.git"
+  },
+  "keywords": [
+    "puppeteer",
+    "gcs",
+    "slack",
+    "screenshot"
+  ],
+  "author": "Heechul Ryu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rainist/scene-stealer/issues"
+  },
+  "homepage": "https://github.com/Rainist/scene-stealer#readme",
+  "dependencies": {
+    "@google-cloud/storage": "^1.5.2",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "lodash": "^4.17.5",
+    "moment": "^2.20.1",
+    "performance-now": "^2.1.0",
+    "puppeteer": "^1.0.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.0",
+    "nodemon": "^1.14.12",
+    "supertest": "^3.0.0"
+  }
+}
