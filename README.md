@@ -4,20 +4,20 @@ An HTTP Interface to take a screenshot via puppeteer of a part of a website and 
 
 ## How to spin up
 
-### npm
+### via npm
 ```
 $ npm i -g scene-stealer
 $ scene-stealer
 ```
 
-### Docker
-TBD
+### via Docker
+https://github.com/Rainist/scene-stealer-docker#as-a-container
 
-### Kubernetes
-TBD
+### via Kubernetes
+https://github.com/Rainist/scene-stealer-docker#as-a-k8s-pod
 
 ## How to use
-TBD
+Take a look at [examples](./examples)
 
 ## What it's made of
 
