@@ -4,6 +4,12 @@ An HTTP Interface to take a screenshot via puppeteer of a part of a website and 
 
 ## How to spin up
 
+### npm
+```
+$ npm i -g scene-stealer
+$ scene-stealer
+```
+
 ### Docker
 TBD
 
