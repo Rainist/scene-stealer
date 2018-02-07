@@ -21,7 +21,7 @@ TBD
 - [expressjs](http://expressjs.com)
 - [@google-cloud/storage](https://github.com/googleapis/nodejs-storage)
 - [Slack Webhook](https://api.slack.com/incoming-webhooks)
-- and more
+- and [more](./package.json)
 
 ## Contribution
 [any contributions are welcome.](https://github.com/rainist/scene-stealer/issues/new)
