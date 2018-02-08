@@ -13,41 +13,6 @@ const envKeyMap = {
   webhook_url: 'SLACK_WEBHOOK_URL'
 }
 
-const req = (() => {
-  const {
-    client_email,
-    private_key,
-    bucket,
-    project_id,
-    webhook_url
-  } = _.mapValues(envKeyMap, key => process.env[key].replace(/\\n/g, '\n'))
-
-  const storage = {
-    type: 'gcs',
-    project_id,
-    bucket,
-    credentials: {
-      client_email,
-      private_key
-    },
-    path: 'test/folder',
-    how_long: {
-      unit: 'years',
-      value: 2
-    }
-  }
-
-  const markets = [{
-    type: 'slack',
-    webhook_url,
-    title: 'title',
-    text: 'text',
-    footer: 'footer'
-  }]
-
-  return { markets, storage, scene }
-})()
-
 describe('test server', () => {
   let server
 
@@ -74,6 +39,46 @@ describe('test server', () => {
       .get('/')
       .expect(200, done)
   })
+
+  const req = (() => {
+    const {
+      client_email,
+      private_key,
+      bucket,
+      project_id,
+      webhook_url
+    } = _.mapValues(envKeyMap, key => {
+      const val = process.env[key]
+      if (val) {
+        return process.env[key].replace(/\\n/g, '\n')
+      }
+    })
+
+    const storage = {
+      type: 'gcs',
+      project_id,
+      bucket,
+      credentials: {
+        client_email,
+        private_key
+      },
+      path: 'test/folder',
+      how_long: {
+        unit: 'years',
+        value: 2
+      }
+    }
+
+    const markets = [{
+      type: 'slack',
+      webhook_url,
+      title: 'title',
+      text: 'text',
+      footer: 'footer'
+    }]
+
+    return { markets, storage, scene }
+  })()
 
   it('responds to /take', done => {
     request(server)
