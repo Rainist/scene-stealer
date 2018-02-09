@@ -29,6 +29,11 @@ Take a look at [examples](./examples)
 - [Slack Webhook](https://api.slack.com/incoming-webhooks)
 - and [more](./package.json)
 
+## Known issues
+- 1.0.0: Didn't consider well addressing reusing puppeteer broweser. So it's very leaky so don't use it.
+- 1.0.1: [This part](https://github.com/Rainist/scene-stealer/blob/612ba9b30d805199ea3c18acb59a1976c5ed784d/src/stealer.js#L27) doesn't seem to release the memory of the page so therefore there is a memory leak for several MB every time it steals the scene.
+  > So WIP to fix this issue
+
 ## Contribution
 [any contributions are welcome.](https://github.com/rainist/scene-stealer/issues/new)
 
