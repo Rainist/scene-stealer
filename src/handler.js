@@ -11,12 +11,13 @@ const { deliver } = require('./deliverer/slack')
 async function take (body) {
   const {
     scene,
+    keys,
     storage,
     markets
   } = body
 
   const start = now()
-  const localImagePath = await steal(scene)
+  const localImagePath = await steal(scene, keys)
   const remoteImageURL = await store(localImagePath, storage) // currently only support gcs
   fs.unlinkSync(localImagePath)
   const slackMarket = markets[0] // currently only support slack
