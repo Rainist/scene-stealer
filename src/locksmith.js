@@ -1,6 +1,7 @@
 'use strict'
 
 const FORM = 'FORM'
+const GET = 'GET'
 
 const _ = require('lodash')
 const Aigle = require('aigle')
@@ -8,6 +9,11 @@ const Aigle = require('aigle')
 Aigle.mixin(_)
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+const ele = async (selector, domIndex) => {
+  const eles = await page.$$(selector)
+  return eles[domIndex]
+}
 
 async function unlockForm(page, key) {
   const { url, form } = key
@@ -24,10 +30,7 @@ async function unlockForm(page, key) {
 
   await page.goto(url, {waitUntil: 'networkidle0'})
 
-  const ele = async (selector, domIndex) => {
-    const eles = await page.$$(selector)
-    return eles[domIndex]
-  }
+  await sleep(waitMS)
 
   const userIdDom = await ele(userIdSelector, user_id_dom_index)
   const passwordDom = await ele(passwordSelector, password_dom_index)
@@ -42,6 +45,16 @@ async function unlockForm(page, key) {
   return page
 }
 
+async function unlockGet(page, key) {
+  const { url, wait_ms: waitMS = 300 } = key
+
+  await page.goto(url, {waitUntil: 'networkidle0'})
+
+  await sleep(waitMS)
+
+  return page
+}
+
 async function unlock(page, keys) {
   await Aigle.forEach(keys, async (key) => {
     const { type } = key
@@ -49,6 +62,8 @@ async function unlock(page, keys) {
     switch (_.upperCase(type)) {
       case FORM:
         return unlockForm(page, key)
+      case GET:
+        return unlockGet(page, key)
       default:
         return Promise.reject(`Unknown key type: ${type}`)
     }
