@@ -1,0 +1,11 @@
+version: '3'
+services:
+  app:
+    command: 'sh -c "npm i && npm run watch"'
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/node/app
+    environment:
+      - NO_SANDBOX=true
