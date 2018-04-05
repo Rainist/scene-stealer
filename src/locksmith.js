@@ -42,7 +42,7 @@ async function unlockForm(page, key) {
 
   await sleep(waitMS)
 
-  return page
+  return true
 }
 
 async function unlockGet(page, key) {
@@ -52,11 +52,11 @@ async function unlockGet(page, key) {
 
   await sleep(waitMS)
 
-  return page
+  return true
 }
 
 async function unlock(page, keys) {
-  await Aigle.forEach(keys, async (key) => {
+  await Aigle.map(keys, (key) => {
     const { type } = key
 
     switch (_.upperCase(type)) {
