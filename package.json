@@ -1,6 +1,6 @@
 {
   "name": "scene-stealer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "An HTTP Interface to take a screenshot via puppeteer of a part of a website and send it to you via slack",
   "main": "index.js",
   "bin": {
