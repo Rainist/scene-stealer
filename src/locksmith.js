@@ -10,10 +10,6 @@ Aigle.mixin(_)
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-const ele = async (selector, domIndex) => {
-  const eles = await page.$$(selector)
-  return eles[domIndex]
-}
 
 async function unlockForm(page, key) {
   const { url, form } = key
@@ -31,6 +27,8 @@ async function unlockForm(page, key) {
   await page.goto(url, {waitUntil: 'networkidle0'})
 
   await sleep(waitMS)
+
+  const ele = async (selector, domIndex) => (await page.$$(selector))[domIndex]
 
   const userIdDom = await ele(userIdSelector, user_id_dom_index)
   const passwordDom = await ele(passwordSelector, password_dom_index)
