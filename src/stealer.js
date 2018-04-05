@@ -1,5 +1,6 @@
 'use strict'
 
+const _ = require('lodash')
 const puppeteer = require('puppeteer')
 const crypto = require('crypto')
 const { unlock } = require('./locksmith')
@@ -42,7 +43,10 @@ async function steal({ url, selector, dom_index: domIndex = 0, viewport, wait_ms
 
 async function birth() {
   await kill(true)
-  const launchOptions = NO_SANDBOX ? {args: ['--no-sandbox']} : null
+  const timeout = process.env.SCENE_STEALER_TIMEOUT_MS || 60000
+  const defaultOptions = { timeout }
+  const argsOptions = NO_SANDBOX ? {args: ['--no-sandbox']} : {}
+  const launchOptions = _.merge(defaultOptions, argsOptions)
 
   browser = await puppeteer.launch(launchOptions)
   isBrowserReady = true
