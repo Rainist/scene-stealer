@@ -6,6 +6,7 @@ const crypto = require('crypto')
 const { unlock } = require('./locksmith')
 
 const NO_SANDBOX = !!process.env.NO_SANDBOX
+const timeout = process.env.SCENE_STEALER_TIMEOUT_MS || 60000
 
 let browser = undefined
 let isBrowserReady = false
@@ -18,6 +19,7 @@ async function steal({ url, selector, dom_index: domIndex = 0, viewport, wait_ms
   }
 
   const page = await browser.newPage()
+  page.setDefaultNavigationTimeout(timeout)
 
   if (keys) {
     await unlock(page, keys)
@@ -43,7 +45,6 @@ async function steal({ url, selector, dom_index: domIndex = 0, viewport, wait_ms
 
 async function birth() {
   await kill(true)
-  const timeout = process.env.SCENE_STEALER_TIMEOUT_MS || 60000
   const defaultOptions = { timeout }
   const argsOptions = NO_SANDBOX ? {args: ['--no-sandbox']} : {}
   const launchOptions = _.merge(defaultOptions, argsOptions)
