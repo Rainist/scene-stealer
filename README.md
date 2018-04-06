@@ -17,6 +17,10 @@ https://github.com/Rainist/scene-stealer-docker#as-a-container
 https://github.com/Rainist/scene-stealer-docker#as-a-k8s-pod
 
 ## How to use
+
+#### Warning
+> 1.0.3-1.0.7 were complete mistakes, so don't use it!
+
 Take a look at [examples](./examples)
 
 ## What it's made of

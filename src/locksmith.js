@@ -2,11 +2,9 @@
 
 const FORM = 'FORM'
 const GET = 'GET'
+const { Observable } = require('rxjs')
 
 const _ = require('lodash')
-const Aigle = require('aigle')
-
-Aigle.mixin(_)
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -24,8 +22,7 @@ async function unlockForm(page, key) {
     submit_dom_index = 0
   } = selector
 
-  await page.goto(url, {waitUntil: 'networkidle0'})
-
+  await page.goto(url, {waitUntil: 'networkidle2'})
   await sleep(waitMS)
 
   const ele = async (selector, domIndex) => (await page.$$(selector))[domIndex]
@@ -46,7 +43,7 @@ async function unlockForm(page, key) {
 async function unlockGet(page, key) {
   const { url, wait_ms: waitMS = 300 } = key
 
-  await page.goto(url, {waitUntil: 'networkidle0'})
+  await page.goto(url, {waitUntil: 'networkidle2'})
 
   await sleep(waitMS)
 
@@ -54,18 +51,23 @@ async function unlockGet(page, key) {
 }
 
 async function unlock(page, keys) {
-  await Aigle.map(keys, (key) => {
-    const { type } = key
+  await Observable
+    .from(keys)
+    .concatMap((key) => {
+      console.log(key)
+      const { type } = key
 
-    switch (_.upperCase(type)) {
-      case FORM:
-        return unlockForm(page, key)
-      case GET:
-        return unlockGet(page, key)
-      default:
-        return Promise.reject(`Unknown key type: ${type}`)
-    }
-  })
+      switch (_.upperCase(type)) {
+        case FORM:
+          return unlockForm(page, key)
+        case GET:
+          return unlockGet(page, key)
+        default:
+          return Promise.reject(`Unknown key type: ${type}`)
+      }
+    })
+    .reduce(_.concat, [])
+    .toPromise()
 
   return true
 }
