@@ -54,7 +54,6 @@ async function unlock(page, keys) {
   await Observable
     .from(keys)
     .concatMap((key) => {
-      console.log(key)
       const { type } = key
 
       switch (_.upperCase(type)) {
