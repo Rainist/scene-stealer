@@ -65,7 +65,7 @@ async function unlock(page, keys) {
           return Promise.reject(`Unknown key type: ${type}`)
       }
     })
-    .reduce(_.concat, [])
+    .reduce((acc, x) => _.concat(acc, x), [])
     .toPromise()
 
   return true
