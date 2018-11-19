@@ -11,10 +11,10 @@ $ scene-stealer
 ```
 
 ### via Docker
-https://github.com/Rainist/scene-stealer-docker#as-a-container
+https://github.com/Rainist/docker-scene-stealer#as-a-container
 
 ### via Kubernetes
-https://github.com/Rainist/scene-stealer-docker#as-a-k8s-pod
+https://github.com/Rainist/docker-scene-stealer#as-a-k8s-pod
 
 ## How to use
 
