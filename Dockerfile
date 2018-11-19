@@ -1,4 +1,4 @@
-FROM alekzonder/puppeteer:1.2.0
+FROM alekzonder/puppeteer:1.8.0-0
 
 USER node
 ENV NODE_ENV=production
